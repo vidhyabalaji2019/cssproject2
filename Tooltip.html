@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real-Time CSS-Only Tooltip Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      margin: 2em;
+      color: #222;
+    }
+    .container {
+      display: flex;
+      gap: 2em;
+      flex-wrap: wrap;
+      max-width: 400px;
+    }
+    .tooltip {
+      position: relative;
+      cursor: pointer;
+      font-size: 1.5rem;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      outline-offset: 4px;
+    }
+    .tooltip:focus {
+      outline: 2px solid #007acc;
+    }
+
+    /* Tooltip text */
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      padding: 8px 14px;
+      color: #fff;
+      background-color: #222;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 10;
+    }
+    /* Tooltip arrow */
+    .tooltip::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 7px solid transparent;
+      border-top-color: #222;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: 10;
+    }
+    /* Show tooltip on hover or focus */
+    .tooltip:hover::after,
+    .tooltip:focus::after {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+    .tooltip:hover::before,
+    .tooltip:focus::before {
+      opacity: 1;
+    }
+
+    /* Responsive tweak to prevent overflow */
+    @media (max-width: 450px) {
+      .tooltip::after {
+        left: 20px;
+        transform: scale(1);
+        max-width: 90vw;
+        white-space: normal;
+      }
+      .tooltip::before {
+        left: 30px;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+    <h1>Resistration Form </h1>
+<form >
+<fieldset>
+    <legend>User Resistration</legend>
+
+    <label for="User Name">User Name</label>
+    <input type="text" name="User Name" id="User Name"> <br> <br>
+
+    <label for="Password">Password</label>
+    <input type="password" name="Password" id="Password"><br> <br>
+
+     <label for="email">Email</label>
+     <input type="email" name="email " id="email Id"> <br> <br>
+
+     <button>Submit</button>
+     <button>Modify</button>
+</fieldset>
+</form>
+
+  <div class="container">
+    <button class="tooltip" data-tooltip="Save your changes" tabindex="0">💾</button>
+    <button class="tooltip" data-tooltip="Delete this item" tabindex="0">🗑️</button>
+    <span class="tooltip" data-tooltip="View notifications" tabindex="0">🔔</span>
+    <span class="tooltip" data-tooltip="User profile settings" tabindex="0">👤</span>
+    <a href="#" class="tooltip" data-tooltip="Get help" tabindex="0">❓</a>
+  </div>
+</body>
+
+    
+</body>
+</html>
